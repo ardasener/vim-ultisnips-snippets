@@ -62,10 +62,7 @@ snippet header "full header file with class and guard"
 #ifndef ${1:`!p snip.rv = snip.fn.replace('.','_').upper() + '_'`}
 #define $1
 
-class ${2: `!p 
-	name = snip.fn[:snip.fn.index('.')]
-	words = name.split('_')
-	snip.rv = "".join([w.capitalize() for w in words]) `} {
+class ${2: `!p snip.rv = "".join(map(lambda x:x.capitalize(),snip.fn[:snip.fn.index('.')].split('_')))`} {
 	public:
 		$3
 	private:
