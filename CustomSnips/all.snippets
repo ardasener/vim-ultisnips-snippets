@@ -1,14 +1,7 @@
 global !p
 
-import subprocess as sp
 import vim
 import datetime
-
-def get_git_name():
-	return sp.check_output('git config user.name', shell=True).decode('utf-8').replace("\n","")
-
-def get_git_email():
-	return sp.check_output('git config user.email', shell=True).decode('utf-8').replace("\n","")
 
 def get_comment_str():
 	# Only works for single line comment strings
@@ -18,24 +11,28 @@ def get_year():
 	now = datetime.datetime.now()
 	return str(now.year)
 
-mit = "This file is licensed under MIT license, see <http://opensource.org/licenses/MIT>"
-gpl = "This file is licensed under GPL license, see <http://www.gnu.org/licenses/>"
+mit = "This file is licensed under the MIT license" 
+mit_link = "See <http://opensource.org/licenses/MIT>"
+gpl = "This file is licensed under the GPLv3 license" 
+gpl_link = "See <http://www.gnu.org/licenses/gpl-3.0>"
 
 endglobal
 
-snippet lmit "mit license and name/email"
-`!p snip.rv = get_comment_str() + "Copyright (c) " + get_year() + " " + get_git_name()`	
-`!p snip.rv = get_comment_str() + "<" + get_git_email() + ">"`	
+snippet lmit "mit license and signature"
+`!p snip.rv = get_comment_str() + "Copyright (c) " + get_year() + " Arda Sener"`
+`!p snip.rv = get_comment_str() + "<http://github.com/ardasener>"`
 `!p snip.rv = get_comment_str() + mit`	
+`!p snip.rv = get_comment_str() + mit_link`	
 endsnippet
 
-snippet lgpl "gpl license and name/email"
-`!p snip.rv = get_comment_str() + "Copyright (c) " + get_year() + " " + get_git_name()`	
-`!p snip.rv = get_comment_str() + "<" + get_git_email() + ">"`	
+snippet lgpl "gpl license and signature"
+`!p snip.rv = get_comment_str() + "Copyright (c) " + get_year() + " Arda Sener"`	
+`!p snip.rv = get_comment_str() + "<http://github.com/ardasener>"`
 `!p snip.rv = get_comment_str() + gpl`	
+`!p snip.rv = get_comment_str() + gpl_link`	
 endsnippet
 
 snippet signature "signature without the license"
-`!p snip.rv = get_comment_str() + get_git_name() + " " + get_year()`	
-`!p snip.rv = get_comment_str() + "<" + get_git_email() + ">"`	
+`!p snip.rv = get_comment_str() + "Arda Sener" + ", " + get_year()`	
+`!p snip.rv = get_comment_str() + "<http://github.com/ardasener>"`
 endsnippet

@@ -1,0 +1,25 @@
+snippet from "from ... import ..."
+from $1 import $2
+endsnippet
+
+snippet class "generic class template"
+class $1($2):
+	def __init__(self):
+		$3
+
+	def __str__(self):
+		$4
+	
+endsnippet
+
+snippet for "for loop"
+for $1 in $2:
+	$3
+endsnippet
+
+snippet try "try/except"
+try $1:
+	$2
+except:
+	$3
+endsnippet
