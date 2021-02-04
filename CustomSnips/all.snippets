@@ -5,14 +5,14 @@ import vim
 import datetime
 
 def get_git_name():
-	return str(sp.check_output('git config user.name', shell=True)).replace("\n","")
+	return sp.check_output('git config user.name', shell=True).decode('utf-8').replace("\n","")
 
 def get_git_email():
-	return str(sp.check_output('git config user.email', shell=True)).replace("\n","")
+	return sp.check_output('git config user.email', shell=True).decode('utf-8').replace("\n","")
 
 def get_comment_str():
 	# Only works for single line comment strings
-	return vim.eval('&cms').split('\%\s')[0]
+	return vim.eval('&cms').split('%s')[0]
 
 def get_year():
 	now = datetime.datetime.now()
@@ -24,18 +24,18 @@ gpl = "This file is licensed under GPL license, see <http://www.gnu.org/licenses
 endglobal
 
 snippet lmit "mit license and name/email"
-`!p snip.rv = get_comment_str() + "Copyright (c) " + get_year() + " " + get_git_name() + "\n"`	
-`!p snip.rv = get_comment_str() + "<" + get_git_email() + ">\n"`	
-`!p snip.rv = get_comment_str() + mit + "\n"`	
+`!p snip.rv = get_comment_str() + "Copyright (c) " + get_year() + " " + get_git_name()`	
+`!p snip.rv = get_comment_str() + "<" + get_git_email() + ">"`	
+`!p snip.rv = get_comment_str() + mit`	
 endsnippet
 
 snippet lgpl "gpl license and name/email"
-`!p snip.rv = get_comment_str() + "Copyright (c) " + get_year() + " " + get_git_name() + "\n"`	
-`!p snip.rv = get_comment_str() + "<" + get_git_email() + ">\n"`	
-`!p snip.rv = get_comment_str() + gpl + "\n"`	
+`!p snip.rv = get_comment_str() + "Copyright (c) " + get_year() + " " + get_git_name()`	
+`!p snip.rv = get_comment_str() + "<" + get_git_email() + ">"`	
+`!p snip.rv = get_comment_str() + gpl`	
 endsnippet
 
 snippet signature "signature without the license"
-`!p snip.rv = get_comment_str() + get_git_name() + " " + get_year() + "\n"`	
-`!p snip.rv = get_comment_str() + "<" + get_git_email() + ">\n"`	
+`!p snip.rv = get_comment_str() + get_git_name() + " " + get_year()`	
+`!p snip.rv = get_comment_str() + "<" + get_git_email() + ">"`	
 endsnippet
