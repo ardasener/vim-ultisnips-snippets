@@ -5,10 +5,10 @@ import vim
 import datetime
 
 def get_git_name():
-	return sp.check_output('git config user.name')
+	return sp.check_output('git config user.name', shell=True).replace("\n","")
 
 def get_git_email():
-	return sp.check_output('git config user.email')
+	return sp.check_output('git config user.email', shell=True).replace("\n","")
 
 def get_comment_str():
 	# Only works for single line comment strings
